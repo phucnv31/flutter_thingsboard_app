@@ -19,18 +19,18 @@ const Map<AlarmSeverity, Color> alarmSeverityColors = {
 };
 
 Map<AlarmSeverity, String> alarmSeverityTranslations = {
-  AlarmSeverity.CRITICAL: 'alarms_CRITICAL'.tr().toString(),
-  AlarmSeverity.MAJOR: 'alarms_MAJOR'.tr().toString(),
-  AlarmSeverity.MINOR: 'alarms_MINOR'.tr().toString(),
-  AlarmSeverity.WARNING: 'alarms_WARNING'.tr().toString(),
-  AlarmSeverity.INDETERMINATE: 'alarms_INDETERMINATE'.tr().toString(),
+  AlarmSeverity.CRITICAL: 'alarms_CRITICAL',
+  AlarmSeverity.MAJOR: 'alarms_MAJOR',
+  AlarmSeverity.MINOR: 'alarms_MINOR',
+  AlarmSeverity.WARNING: 'alarms_WARNING',
+  AlarmSeverity.INDETERMINATE: 'alarms_INDETERMINATE',
 };
 
 Map<AlarmStatus, String> alarmStatusTranslations = {
-  AlarmStatus.ACTIVE_ACK: 'AlarmStatus.ACTIVE_ACK'.tr().toString(),
-  AlarmStatus.ACTIVE_UNACK: 'AlarmStatus.ACTIVE_UNACK'.tr().toString(),
-  AlarmStatus.CLEARED_ACK: 'AlarmStatus.CLEARED_ACK'.tr().toString(),
-  AlarmStatus.CLEARED_UNACK: 'AlarmStatus.CLEARED_UNACK'.tr().toString(),
+  AlarmStatus.ACTIVE_ACK: 'AlarmStatus.ACTIVE_ACK',
+  AlarmStatus.ACTIVE_UNACK: 'AlarmStatus.ACTIVE_UNACK',
+  AlarmStatus.CLEARED_ACK: 'AlarmStatus.CLEARED_ACK',
+  AlarmStatus.CLEARED_UNACK: 'AlarmStatus.CLEARED_UNACK',
 };
 
 mixin AlarmsBase on EntitiesBase<AlarmInfo, AlarmQuery> {
@@ -199,7 +199,7 @@ class _AlarmCardState extends TbContextState<AlarmCard> {
                                                           height: 16 / 12)
                                                   )
                                               ),
-                                              Text(alarmSeverityTranslations[alarm.severity]!,
+                                              Text(alarmSeverityTranslations[alarm.severity]!.tr().toString(),
                                                   style: TextStyle(
                                                       color: alarmSeverityColors[alarm.severity]!,
                                                       fontWeight: FontWeight.w500,
@@ -224,7 +224,7 @@ class _AlarmCardState extends TbContextState<AlarmCard> {
                               SizedBox(width: 16),
                               Flexible(
                                   fit: FlexFit.tight,
-                                  child: Text(alarmStatusTranslations[alarm.status]!,
+                                  child: Text(alarmStatusTranslations[alarm.status]!.tr().toString(),
                                       style: TextStyle(
                                           color: Color(0xFF282828),
                                           fontWeight: FontWeight.normal,
