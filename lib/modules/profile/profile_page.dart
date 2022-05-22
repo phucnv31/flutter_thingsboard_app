@@ -1,3 +1,4 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -46,7 +47,7 @@ class _ProfilePageState extends TbPageState<ProfilePage> {
         backgroundColor: Colors.white,
         appBar: TbAppBar(
           tbContext,
-          title: const Text('Profile'),
+          title: Text('profile'.tr().toString()),
           actions: [
             IconButton(
                 icon: Icon(
@@ -82,12 +83,12 @@ class _ProfilePageState extends TbPageState<ProfilePage> {
                             FormBuilderTextField(
                               name: 'email',
                               validator: FormBuilderValidators.compose([
-                                FormBuilderValidators.required(context, errorText: 'Email is required.'),
-                                FormBuilderValidators.email(context, errorText: 'Invalid email format.')
+                                FormBuilderValidators.required(context, errorText: 'email_required'.tr().toString()),
+                                FormBuilderValidators.email(context, errorText: 'email_invalid'.tr().toString())
                               ]),
                               decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  labelText: 'Email *'
+                                  labelText: 'email_form_label'.tr().toString()
                               ),
                             ),
                             SizedBox(height: 24),
@@ -95,7 +96,7 @@ class _ProfilePageState extends TbPageState<ProfilePage> {
                               name: 'firstName',
                               decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  labelText: 'First Name'
+                                  labelText: 'first_name_form_label'.tr().toString()
                               ),
                             ),
                             SizedBox(height: 24),
@@ -103,7 +104,7 @@ class _ProfilePageState extends TbPageState<ProfilePage> {
                               name: 'lastName',
                               decoration: InputDecoration(
                                   border: OutlineInputBorder(),
-                                  labelText: 'Last Name'
+                                  labelText: 'last_name_form_label'.tr().toString()
                               ),
                             ),
                             SizedBox(height: 24),
@@ -113,7 +114,7 @@ class _ProfilePageState extends TbPageState<ProfilePage> {
                                 onPressed: () {
                                   _changePassword();
                                 },
-                                child: Center(child: Text('Change Password'))
+                                child: Center(child: Text('btn_change_password'.tr().toString()))
                             )
                           ]
                       ),

@@ -11,6 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations: # Add this line
+    sdk: flutter
+  easy_localization: ^3.0.0
   thingsboard_client: 1.0.2
   intl: ^0.17.0
   flutter_secure_storage: ^5.0.2
@@ -51,6 +54,7 @@ flutter:
   uses-material-design: true
   assets:
      - assets/images/
+     - assets/i18n/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -1,3 +1,4 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -42,7 +43,7 @@ class TbMainNavigationItem {
       List<TbMainNavigationItem> items = [
         TbMainNavigationItem(
             page: HomePage(tbContext),
-            title: 'Home',
+            title: 'home'.tr().toString(),
             icon: Icon(Icons.home),
             path: '/home'
         )
@@ -55,13 +56,13 @@ class TbMainNavigationItem {
         items.addAll([
           TbMainNavigationItem(
               page: AlarmsPage(tbContext),
-              title: 'Alarms',
+              title: 'alarms'.tr().toString(),
               icon: Icon(Icons.notifications),
               path: '/alarms'
           ),
           TbMainNavigationItem(
             page: DevicesMainPage(tbContext),
-            title: 'Devices',
+            title: 'devices'.tr().toString(),
             icon: Icon(Icons.devices_other),
             path: '/devices'
           )
@@ -74,7 +75,7 @@ class TbMainNavigationItem {
       }
       items.add(TbMainNavigationItem(
           page: MorePage(tbContext),
-          title: 'More',
+          title: 'more'.tr().toString(),
           icon: Icon(Icons.menu),
           path: '/more'
       ));

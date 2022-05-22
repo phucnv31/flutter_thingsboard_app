@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 import 'package:flutter/foundation.dart';
@@ -19,11 +20,22 @@ void main() async {
 //  await FlutterDownloader.initialize();
 //  await Permission.storage.request();
 
+  await EasyLocalization.ensureInitialized();
+
   if (UniversalPlatform.isAndroid) {
     await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
   }
 
-  runApp(ThingsboardApp());
+  runApp(
+      EasyLocalization(
+          child: ThingsboardApp(),
+          supportedLocales: [
+            Locale('vi', 'VN'),
+            Locale('en', 'US')
+          ],
+          path: "assets/i18n"
+      )
+  );
 }
 
 class ThingsboardApp extends StatefulWidget {
@@ -130,14 +142,34 @@ class ThingsboardAppState extends State<ThingsboardApp> with TickerProviderState
         systemNavigationBarIconBrightness: Brightness.light
     ));
     return MaterialApp(
-      title: 'ThingsBoard',
+      supportedLocales: context.supportedLocales,
+      localizationsDelegates: context.localizationDelegates,
+      locale: context.locale,
+      localeListResolutionCallback: (locales, supportedLocales) {
+        // We map the supported locales to language codes
+        // note that this is completely optional and this logic can be changed as you like
+        final supportedLanguageCodes =
+        supportedLocales.map((e) => e.languageCode);
+        if (locales != null) {
+          // we iterate over the locales and find the first one that is supported
+          for (final locale in locales) {
+            if (supportedLanguageCodes.contains(locale.languageCode)) {
+              return locale;
+            }
+          }
+        }
+
+        // if we didn't find a supported language, we return the vietnamese language
+        return const Locale('vi');
+      },
+      title: 'things_board_title'.tr().toString(),
         themeMode: ThemeMode.light,
         home: TwoPageView(
           controller: _mainPageViewController,
           first: MaterialApp(
             key: mainAppKey,
             scaffoldMessengerKey: appRouter.tbContext.messengerKey,
-            title: 'ThingsBoard',
+            title: 'things_board_title'.tr().toString(),
             theme: tbTheme,
             themeMode: ThemeMode.light,
             darkTheme: tbDarkTheme,
@@ -147,7 +179,7 @@ class ThingsboardAppState extends State<ThingsboardApp> with TickerProviderState
           second: MaterialApp(
             key: dashboardKey,
             // scaffoldMessengerKey: appRouter.tbContext.messengerKey,
-            title: 'ThingsBoard',
+            title: 'things_board_title'.tr().toString(),
             theme: tbTheme,
             themeMode: ThemeMode.light,
             darkTheme: tbDarkTheme,

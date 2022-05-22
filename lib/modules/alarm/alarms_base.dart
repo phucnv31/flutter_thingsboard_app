@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
@@ -17,28 +18,28 @@ const Map<AlarmSeverity, Color> alarmSeverityColors = {
   AlarmSeverity.INDETERMINATE: Color(0xFF00FF00),
 };
 
-const Map<AlarmSeverity, String> alarmSeverityTranslations = {
-  AlarmSeverity.CRITICAL: 'Critical',
-  AlarmSeverity.MAJOR: 'Major',
-  AlarmSeverity.MINOR: 'Minor',
-  AlarmSeverity.WARNING: 'Warning',
-  AlarmSeverity.INDETERMINATE: 'Indeterminate',
+Map<AlarmSeverity, String> alarmSeverityTranslations = {
+  AlarmSeverity.CRITICAL: 'alarms_CRITICAL'.tr().toString(),
+  AlarmSeverity.MAJOR: 'alarms_MAJOR'.tr().toString(),
+  AlarmSeverity.MINOR: 'alarms_MINOR'.tr().toString(),
+  AlarmSeverity.WARNING: 'alarms_WARNING'.tr().toString(),
+  AlarmSeverity.INDETERMINATE: 'alarms_INDETERMINATE'.tr().toString(),
 };
 
-const Map<AlarmStatus, String> alarmStatusTranslations = {
-  AlarmStatus.ACTIVE_ACK: 'Active Acknowledged',
-  AlarmStatus.ACTIVE_UNACK: 'Active Unacknowledged',
-  AlarmStatus.CLEARED_ACK: 'Cleared Acknowledged',
-  AlarmStatus.CLEARED_UNACK: 'Cleared Unacknowledged',
+Map<AlarmStatus, String> alarmStatusTranslations = {
+  AlarmStatus.ACTIVE_ACK: 'AlarmStatus.ACTIVE_ACK'.tr().toString(),
+  AlarmStatus.ACTIVE_UNACK: 'AlarmStatus.ACTIVE_UNACK'.tr().toString(),
+  AlarmStatus.CLEARED_ACK: 'AlarmStatus.CLEARED_ACK'.tr().toString(),
+  AlarmStatus.CLEARED_UNACK: 'AlarmStatus.CLEARED_UNACK'.tr().toString(),
 };
 
 mixin AlarmsBase on EntitiesBase<AlarmInfo, AlarmQuery> {
 
   @override
-  String get title => 'Alarms';
+  String get title => 'alarms'.tr().toString();
 
   @override
-  String get noItemsFoundText => 'No alarms found';
+  String get noItemsFoundText => 'no_alarms_found'.tr().toString();
 
   @override
   Future<PageData<AlarmInfo>> fetchEntities(AlarmQuery query) {
@@ -53,7 +54,7 @@ mixin AlarmsBase on EntitiesBase<AlarmInfo, AlarmQuery> {
       navigateToDashboard(dashboardId, dashboardTitle: alarm.originatorName, state: state);
     } else {
       if (tbClient.isTenantAdmin()) {
-        showWarnNotification('Mobile dashboard should be configured in device profile alarm rules!');
+        showWarnNotification('mobile_dashboard_should_config_in_device_profile_alarm_rules'.tr().toString());
       }
     }
   }
@@ -268,7 +269,7 @@ class _AlarmCardState extends TbContextState<AlarmCard> {
   }
 
   _clearAlarm(AlarmInfo alarm) async {
-    var res = await confirm(title: 'Clear Alarm', message: 'Are you sure you want to clear Alarm?', cancel: 'No', ok: 'Yes');
+    var res = await confirm(title: 'confirm_clear_alarm_title'.tr().toString(), message: 'confirm_clear_alarm_body'.tr().toString(), cancel: 'no'.tr().toString(), ok: 'yes'.tr().toString());
     if (res != null && res) {
       setState(() {
         loading = true;
@@ -284,7 +285,7 @@ class _AlarmCardState extends TbContextState<AlarmCard> {
   }
 
   _ackAlarm(AlarmInfo alarm) async {
-    var res = await confirm(title: 'Acknowledge Alarm', message: 'Are you sure you want to acknowledge Alarm?', cancel: 'No', ok: 'Yes');
+    var res = await confirm(title: 'confirm_ack_alarm_title'.tr().toString(), message: 'confirm_ack_alarm_body'.tr().toString(), cancel: 'no'.tr().toString(), ok: 'yes'.tr().toString());
     if (res != null && res) {
       setState(() {
         loading = true;

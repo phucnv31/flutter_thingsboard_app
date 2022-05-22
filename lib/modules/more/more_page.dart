@@ -1,3 +1,4 @@
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:thingsboard_app/core/context/tb_context.dart';
 import 'package:thingsboard_app/core/context/tb_context_widget.dart';
@@ -31,7 +32,10 @@ class _MorePageState extends TbContextState<MorePage> {
                     Spacer(),
                     IconButton(icon: Icon(Icons.settings, color: Color(0xFFAFAFAF)), onPressed: () async {
                       await navigateTo('/profile');
-                      setState(() {});
+                      // setState(() {});
+                      if (mounted) {
+                        setState(() => {});
+                      }
                     })
                   ],
                 ),
@@ -71,7 +75,7 @@ class _MorePageState extends TbContextState<MorePage> {
                               children: [
                                 Icon(Icons.logout, color: Color(0xFFE04B2F)),
                                 SizedBox(width: 34),
-                                Text('Log out',
+                                Text('log_out'.tr().toString(),
                                     style: TextStyle(
                                       color: Color(0xFFE04B2F),
                                         fontStyle: FontStyle.normal,
@@ -92,6 +96,11 @@ class _MorePageState extends TbContextState<MorePage> {
             ),
         )
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   Widget buildMoreMenuItems(BuildContext context) {
@@ -193,26 +202,31 @@ class MoreMenuItem {
         case Authority.TENANT_ADMIN:
           items.addAll([
             MoreMenuItem(
-                title: 'Customers',
+                title: 'customers'.tr().toString(),
                 icon: Icons.supervisor_account,
                 path: '/customers'
             ),
             MoreMenuItem(
-                title: 'Assets',
+                title: 'assets'.tr().toString(),
                 icon: Icons.domain,
                 path: '/assets'
             ),
             MoreMenuItem(
-                title: 'Audit Logs',
+                title: 'audit_logs'.tr().toString(),
                 icon: Icons.track_changes,
                 path: '/auditLogs'
+            ),
+            MoreMenuItem(
+                title: 'language'.tr().toString(),
+                icon: Icons.language,
+                path: '/language'
             )
           ]);
           break;
         case Authority.CUSTOMER_USER:
           items.addAll([
             MoreMenuItem(
-                title: 'Assets',
+                title: 'assets'.tr().toString(),
                 icon: Icons.domain,
                 path: '/assets'
             )
